@@ -1,0 +1,907 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SHOPModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Beden">
+          <Key>
+            <PropertyRef Name="BedenID" />
+          </Key>
+          <Property Name="BedenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="bedenAdı" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BileşenOranı">
+          <Key>
+            <PropertyRef Name="bileşenID" />
+          </Key>
+          <Property Name="bileşenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="pamukOranı" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="polyesterOranı" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="KetenOranı" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Cinsiyet">
+          <Key>
+            <PropertyRef Name="cinsiyet_ID" />
+          </Key>
+          <Property Name="cinsiyet_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cinsiyetAdı" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="faturaID" />
+          </Key>
+          <Property Name="faturaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanıcıID" Type="int" />
+          <Property Name="toplam" Type="int" />
+          <Property Name="siparişNo" Type="int" />
+        </EntityType>
+        <EntityType Name="KULLANICI">
+          <Key>
+            <PropertyRef Name="kullanıcıID" />
+          </Key>
+          <Property Name="Ad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Soyad" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="cinsiyetID" Type="int" />
+          <Property Name="kullanıcıID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="şifre" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="kullanıcıTürüID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="KullanıcıTürü">
+          <Key>
+            <PropertyRef Name="kullanıcıTürüID" />
+          </Key>
+          <Property Name="kullanıcıTürüID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanıcıAdı" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Manken">
+          <Key>
+            <PropertyRef Name="mankenID" />
+          </Key>
+          <Property Name="mankenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BedenID" Type="int" Nullable="false" />
+          <Property Name="boy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="kilo" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <EntityType Name="Sipariş">
+          <Key>
+            <PropertyRef Name="siparişNo" />
+          </Key>
+          <Property Name="siparişNo" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanıcıID" Type="int" Nullable="false" />
+          <Property Name="ürünBedenID" Type="int" Nullable="false" />
+          <Property Name="tutar" Type="int" Nullable="false" />
+          <Property Name="tarih" Type="date" />
+        </EntityType>
+        <EntityType Name="Tasarımcı">
+          <Key>
+            <PropertyRef Name="tasarımcıID" />
+          </Key>
+          <Property Name="tasarımcıID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="kullanıcıID" Type="int" Nullable="false" />
+          <Property Name="kazanç" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="tasarımcıAdı" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ürün">
+          <Key>
+            <PropertyRef Name="ürünID" />
+          </Key>
+          <Property Name="ürünID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="fiyat" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="ürünTürüID" Type="int" Nullable="false" />
+          <Property Name="tasarımcıID" Type="int" />
+          <Property Name="bileşenID" Type="int" />
+          <Property Name="ürünAdı" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="mankenID" Type="int" />
+          <Property Name="photo" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="ÜrünBeden">
+          <Key>
+            <PropertyRef Name="ürünBedenID" />
+          </Key>
+          <Property Name="ürünBedenID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BedenID" Type="int" Nullable="false" />
+          <Property Name="ürünID" Type="int" />
+          <Property Name="stokMiktarı" Type="int" />
+        </EntityType>
+        <EntityType Name="ÜrünTürü">
+          <Key>
+            <PropertyRef Name="ürünTürüID" />
+          </Key>
+          <Property Name="ürünTürüID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ürünAdı" Type="nvarchar" MaxLength="25" Nullable="false" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'SHOP.dbo.Ürünler' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="Ürünler">
+          <Key>
+            <PropertyRef Name="ürünID" />
+            <PropertyRef Name="ürünAdı" />
+            <PropertyRef Name="bedenAdı" />
+          </Key>
+          <Property Name="ürünID" Type="int" Nullable="false" />
+          <Property Name="ürünAdı" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="stokMiktarı" Type="int" />
+          <Property Name="bedenAdı" Type="nvarchar" MaxLength="25" Nullable="false" />
+          <Property Name="fiyat" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="boy" Type="numeric" Precision="18" Scale="0" />
+          <Property Name="kilo" Type="numeric" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_beden">
+          <End Role="Beden" Type="Self.Beden" Multiplicity="1" />
+          <End Role="ÜrünBeden" Type="Self.ÜrünBeden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beden">
+              <PropertyRef Name="BedenID" />
+            </Principal>
+            <Dependent Role="ÜrünBeden">
+              <PropertyRef Name="BedenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cinsiyet">
+          <End Role="Cinsiyet" Type="Self.Cinsiyet" Multiplicity="0..1" />
+          <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinsiyet">
+              <PropertyRef Name="cinsiyet_ID" />
+            </Principal>
+            <Dependent Role="KULLANICI">
+              <PropertyRef Name="cinsiyetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kullanıcı">
+          <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sipariş" Type="Self.Sipariş" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANICI">
+              <PropertyRef Name="kullanıcıID" />
+            </Principal>
+            <Dependent Role="Sipariş">
+              <PropertyRef Name="kullanıcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kullanıcıtasarımcı">
+          <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tasarımcı" Type="Self.Tasarımcı" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANICI">
+              <PropertyRef Name="kullanıcıID" />
+            </Principal>
+            <Dependent Role="Tasarımcı">
+              <PropertyRef Name="kullanıcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kullanıcıtürü">
+          <End Role="KullanıcıTürü" Type="Self.KullanıcıTürü" Multiplicity="1" />
+          <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullanıcıTürü">
+              <PropertyRef Name="kullanıcıTürüID" />
+            </Principal>
+            <Dependent Role="KULLANICI">
+              <PropertyRef Name="kullanıcıTürüID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mankenbedeni">
+          <End Role="Beden" Type="Self.Beden" Multiplicity="1" />
+          <End Role="Manken" Type="Self.Manken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beden">
+              <PropertyRef Name="BedenID" />
+            </Principal>
+            <Dependent Role="Manken">
+              <PropertyRef Name="BedenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürünbeden">
+          <End Role="ÜrünBeden" Type="Self.ÜrünBeden" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sipariş" Type="Self.Sipariş" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ÜrünBeden">
+              <PropertyRef Name="ürünBedenID" />
+            </Principal>
+            <Dependent Role="Sipariş">
+              <PropertyRef Name="ürünBedenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürünbedeni">
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ÜrünBeden" Type="Self.ÜrünBeden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ürün">
+              <PropertyRef Name="ürünID" />
+            </Principal>
+            <Dependent Role="ÜrünBeden">
+              <PropertyRef Name="ürünID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürünbileşen">
+          <End Role="BileşenOranı" Type="Self.BileşenOranı" Multiplicity="0..1" />
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BileşenOranı">
+              <PropertyRef Name="bileşenID" />
+            </Principal>
+            <Dependent Role="Ürün">
+              <PropertyRef Name="bileşenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürünmanken">
+          <End Role="Manken" Type="Self.Manken" Multiplicity="0..1" />
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manken">
+              <PropertyRef Name="mankenID" />
+            </Principal>
+            <Dependent Role="Ürün">
+              <PropertyRef Name="mankenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürüntasarımcı">
+          <End Role="Tasarımcı" Type="Self.Tasarımcı" Multiplicity="0..1" />
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasarımcı">
+              <PropertyRef Name="tasarımcıID" />
+            </Principal>
+            <Dependent Role="Ürün">
+              <PropertyRef Name="tasarımcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürüntürü">
+          <End Role="ÜrünTürü" Type="Self.ÜrünTürü" Multiplicity="1" />
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ÜrünTürü">
+              <PropertyRef Name="ürünTürüID" />
+            </Principal>
+            <Dependent Role="Ürün">
+              <PropertyRef Name="ürünTürüID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Ürünler_" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="SHOPModelStoreContainer">
+          <EntitySet Name="Beden" EntityType="Self.Beden" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BileşenOranı" EntityType="Self.BileşenOranı" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Cinsiyet" EntityType="Self.Cinsiyet" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Fatura" EntityType="Self.Fatura" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KULLANICI" EntityType="Self.KULLANICI" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="KullanıcıTürü" EntityType="Self.KullanıcıTürü" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Manken" EntityType="Self.Manken" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sipariş" EntityType="Self.Sipariş" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tasarımcı" EntityType="Self.Tasarımcı" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ürün" EntityType="Self.Ürün" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ÜrünBeden" EntityType="Self.ÜrünBeden" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ÜrünTürü" EntityType="Self.ÜrünTürü" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Ürünler" EntityType="Self.Ürünler" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [Ürünler].[ürünID] AS [ürünID], 
+    [Ürünler].[ürünAdı] AS [ürünAdı], 
+    [Ürünler].[stokMiktarı] AS [stokMiktarı], 
+    [Ürünler].[bedenAdı] AS [bedenAdı], 
+    [Ürünler].[fiyat] AS [fiyat], 
+    [Ürünler].[boy] AS [boy], 
+    [Ürünler].[kilo] AS [kilo]
+    FROM [dbo].[Ürünler] AS [Ürünler]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_beden" Association="Self.FK_beden">
+            <End Role="Beden" EntitySet="Beden" />
+            <End Role="ÜrünBeden" EntitySet="ÜrünBeden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cinsiyet" Association="Self.FK_cinsiyet">
+            <End Role="Cinsiyet" EntitySet="Cinsiyet" />
+            <End Role="KULLANICI" EntitySet="KULLANICI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kullanıcı" Association="Self.FK_kullanıcı">
+            <End Role="KULLANICI" EntitySet="KULLANICI" />
+            <End Role="Sipariş" EntitySet="Sipariş" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kullanıcıtasarımcı" Association="Self.FK_kullanıcıtasarımcı">
+            <End Role="KULLANICI" EntitySet="KULLANICI" />
+            <End Role="Tasarımcı" EntitySet="Tasarımcı" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kullanıcıtürü" Association="Self.FK_kullanıcıtürü">
+            <End Role="KullanıcıTürü" EntitySet="KullanıcıTürü" />
+            <End Role="KULLANICI" EntitySet="KULLANICI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mankenbedeni" Association="Self.FK_mankenbedeni">
+            <End Role="Beden" EntitySet="Beden" />
+            <End Role="Manken" EntitySet="Manken" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürünbeden" Association="Self.FK_ürünbeden">
+            <End Role="ÜrünBeden" EntitySet="ÜrünBeden" />
+            <End Role="Sipariş" EntitySet="Sipariş" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürünbedeni" Association="Self.FK_ürünbedeni">
+            <End Role="Ürün" EntitySet="Ürün" />
+            <End Role="ÜrünBeden" EntitySet="ÜrünBeden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürünbileşen" Association="Self.FK_ürünbileşen">
+            <End Role="BileşenOranı" EntitySet="BileşenOranı" />
+            <End Role="Ürün" EntitySet="Ürün" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürünmanken" Association="Self.FK_ürünmanken">
+            <End Role="Manken" EntitySet="Manken" />
+            <End Role="Ürün" EntitySet="Ürün" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürüntasarımcı" Association="Self.FK_ürüntasarımcı">
+            <End Role="Tasarımcı" EntitySet="Tasarımcı" />
+            <End Role="Ürün" EntitySet="Ürün" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürüntürü" Association="Self.FK_ürüntürü">
+            <End Role="ÜrünTürü" EntitySet="ÜrünTürü" />
+            <End Role="Ürün" EntitySet="Ürün" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SHOPModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Beden">
+          <Key>
+            <PropertyRef Name="BedenID" />
+          </Key>
+          <Property Name="BedenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="bedenAdı" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="ÜrünBeden" Relationship="Self.FK_beden" FromRole="Beden" ToRole="ÜrünBeden" />
+          <NavigationProperty Name="Manken" Relationship="Self.FK_mankenbedeni" FromRole="Beden" ToRole="Manken" />
+        </EntityType>
+        <EntityType Name="BileşenOranı">
+          <Key>
+            <PropertyRef Name="bileşenID" />
+          </Key>
+          <Property Name="bileşenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="pamukOranı" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="polyesterOranı" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="KetenOranı" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Ürün" Relationship="Self.FK_ürünbileşen" FromRole="BileşenOranı" ToRole="Ürün" />
+        </EntityType>
+        <EntityType Name="Cinsiyet">
+          <Key>
+            <PropertyRef Name="cinsiyet_ID" />
+          </Key>
+          <Property Name="cinsiyet_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cinsiyetAdı" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="KULLANICI" Relationship="Self.FK_cinsiyet" FromRole="Cinsiyet" ToRole="KULLANICI" />
+        </EntityType>
+        <EntityType Name="Fatura">
+          <Key>
+            <PropertyRef Name="faturaID" />
+          </Key>
+          <Property Name="faturaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanıcıID" Type="Int32" />
+          <Property Name="toplam" Type="Int32" />
+          <Property Name="siparişNo" Type="Int32" />
+        </EntityType>
+        <EntityType Name="KULLANICI">
+          <Key>
+            <PropertyRef Name="kullanıcıID" />
+          </Key>
+          <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Soyad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cinsiyetID" Type="Int32" />
+          <Property Name="kullanıcıID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="şifre" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="kullanıcıTürüID" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Cinsiyet" Relationship="Self.FK_cinsiyet" FromRole="KULLANICI" ToRole="Cinsiyet" />
+          <NavigationProperty Name="Sipariş" Relationship="Self.FK_kullanıcı" FromRole="KULLANICI" ToRole="Sipariş" />
+          <NavigationProperty Name="Tasarımcı" Relationship="Self.FK_kullanıcıtasarımcı" FromRole="KULLANICI" ToRole="Tasarımcı" />
+          <NavigationProperty Name="KullanıcıTürü" Relationship="Self.FK_kullanıcıtürü" FromRole="KULLANICI" ToRole="KullanıcıTürü" />
+        </EntityType>
+        <EntityType Name="KullanıcıTürü">
+          <Key>
+            <PropertyRef Name="kullanıcıTürüID" />
+          </Key>
+          <Property Name="kullanıcıTürüID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanıcıAdı" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="KULLANICI" Relationship="Self.FK_kullanıcıtürü" FromRole="KullanıcıTürü" ToRole="KULLANICI" />
+        </EntityType>
+        <EntityType Name="Manken">
+          <Key>
+            <PropertyRef Name="mankenID" />
+          </Key>
+          <Property Name="mankenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BedenID" Type="Int32" Nullable="false" />
+          <Property Name="boy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="kilo" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Beden" Relationship="Self.FK_mankenbedeni" FromRole="Manken" ToRole="Beden" />
+          <NavigationProperty Name="Ürün" Relationship="Self.FK_ürünmanken" FromRole="Manken" ToRole="Ürün" />
+        </EntityType>
+        <EntityType Name="Sipariş">
+          <Key>
+            <PropertyRef Name="siparişNo" />
+          </Key>
+          <Property Name="siparişNo" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanıcıID" Type="Int32" Nullable="false" />
+          <Property Name="ürünBedenID" Type="Int32" Nullable="false" />
+          <Property Name="tutar" Type="Int32" Nullable="false" />
+          <Property Name="tarih" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="KULLANICI" Relationship="Self.FK_kullanıcı" FromRole="Sipariş" ToRole="KULLANICI" />
+          <NavigationProperty Name="ÜrünBeden" Relationship="Self.FK_ürünbeden" FromRole="Sipariş" ToRole="ÜrünBeden" />
+        </EntityType>
+        <EntityType Name="Tasarımcı">
+          <Key>
+            <PropertyRef Name="tasarımcıID" />
+          </Key>
+          <Property Name="tasarımcıID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="kullanıcıID" Type="Int32" Nullable="false" />
+          <Property Name="kazanç" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="tasarımcıAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="KULLANICI" Relationship="Self.FK_kullanıcıtasarımcı" FromRole="Tasarımcı" ToRole="KULLANICI" />
+          <NavigationProperty Name="Ürün" Relationship="Self.FK_ürüntasarımcı" FromRole="Tasarımcı" ToRole="Ürün" />
+        </EntityType>
+        <EntityType Name="Ürün">
+          <Key>
+            <PropertyRef Name="ürünID" />
+          </Key>
+          <Property Name="ürünID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="fiyat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="ürünTürüID" Type="Int32" Nullable="false" />
+          <Property Name="tasarımcıID" Type="Int32" />
+          <Property Name="bileşenID" Type="Int32" />
+          <Property Name="ürünAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="mankenID" Type="Int32" />
+          <Property Name="photo" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="BileşenOranı" Relationship="Self.FK_ürünbileşen" FromRole="Ürün" ToRole="BileşenOranı" />
+          <NavigationProperty Name="Manken" Relationship="Self.FK_ürünmanken" FromRole="Ürün" ToRole="Manken" />
+          <NavigationProperty Name="Tasarımcı" Relationship="Self.FK_ürüntasarımcı" FromRole="Ürün" ToRole="Tasarımcı" />
+          <NavigationProperty Name="ÜrünBeden" Relationship="Self.FK_ürünbedeni" FromRole="Ürün" ToRole="ÜrünBeden" />
+          <NavigationProperty Name="ÜrünTürü" Relationship="Self.FK_ürüntürü" FromRole="Ürün" ToRole="ÜrünTürü" />
+        </EntityType>
+        <EntityType Name="ÜrünBeden">
+          <Key>
+            <PropertyRef Name="ürünBedenID" />
+          </Key>
+          <Property Name="ürünBedenID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BedenID" Type="Int32" Nullable="false" />
+          <Property Name="ürünID" Type="Int32" />
+          <Property Name="stokMiktarı" Type="Int32" />
+          <NavigationProperty Name="Beden" Relationship="Self.FK_beden" FromRole="ÜrünBeden" ToRole="Beden" />
+          <NavigationProperty Name="Sipariş" Relationship="Self.FK_ürünbeden" FromRole="ÜrünBeden" ToRole="Sipariş" />
+          <NavigationProperty Name="Ürün" Relationship="Self.FK_ürünbedeni" FromRole="ÜrünBeden" ToRole="Ürün" />
+        </EntityType>
+        <EntityType Name="ÜrünTürü">
+          <Key>
+            <PropertyRef Name="ürünTürüID" />
+          </Key>
+          <Property Name="ürünTürüID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ürünAdı" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Ürün" Relationship="Self.FK_ürüntürü" FromRole="ÜrünTürü" ToRole="Ürün" />
+        </EntityType>
+        <EntityType Name="Ürünler">
+          <Key>
+            <PropertyRef Name="ürünID" />
+            <PropertyRef Name="ürünAdı" />
+            <PropertyRef Name="bedenAdı" />
+          </Key>
+          <Property Name="ürünID" Type="Int32" Nullable="false" />
+          <Property Name="ürünAdı" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="stokMiktarı" Type="Int32" />
+          <Property Name="bedenAdı" Type="String" MaxLength="25" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="fiyat" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="boy" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="kilo" Type="Decimal" Precision="18" Scale="0" />
+        </EntityType>
+        <Association Name="FK_beden">
+          <End Role="Beden" Type="Self.Beden" Multiplicity="1" />
+          <End Role="ÜrünBeden" Type="Self.ÜrünBeden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beden">
+              <PropertyRef Name="BedenID" />
+            </Principal>
+            <Dependent Role="ÜrünBeden">
+              <PropertyRef Name="BedenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_mankenbedeni">
+          <End Role="Beden" Type="Self.Beden" Multiplicity="1" />
+          <End Role="Manken" Type="Self.Manken" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Beden">
+              <PropertyRef Name="BedenID" />
+            </Principal>
+            <Dependent Role="Manken">
+              <PropertyRef Name="BedenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürünbileşen">
+          <End Role="BileşenOranı" Type="Self.BileşenOranı" Multiplicity="0..1" />
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BileşenOranı">
+              <PropertyRef Name="bileşenID" />
+            </Principal>
+            <Dependent Role="Ürün">
+              <PropertyRef Name="bileşenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_cinsiyet">
+          <End Role="Cinsiyet" Type="Self.Cinsiyet" Multiplicity="0..1" />
+          <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Cinsiyet">
+              <PropertyRef Name="cinsiyet_ID" />
+            </Principal>
+            <Dependent Role="KULLANICI">
+              <PropertyRef Name="cinsiyetID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kullanıcı">
+          <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sipariş" Type="Self.Sipariş" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANICI">
+              <PropertyRef Name="kullanıcıID" />
+            </Principal>
+            <Dependent Role="Sipariş">
+              <PropertyRef Name="kullanıcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kullanıcıtasarımcı">
+          <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Tasarımcı" Type="Self.Tasarımcı" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KULLANICI">
+              <PropertyRef Name="kullanıcıID" />
+            </Principal>
+            <Dependent Role="Tasarımcı">
+              <PropertyRef Name="kullanıcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_kullanıcıtürü">
+          <End Role="KullanıcıTürü" Type="Self.KullanıcıTürü" Multiplicity="1" />
+          <End Role="KULLANICI" Type="Self.KULLANICI" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="KullanıcıTürü">
+              <PropertyRef Name="kullanıcıTürüID" />
+            </Principal>
+            <Dependent Role="KULLANICI">
+              <PropertyRef Name="kullanıcıTürüID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürünmanken">
+          <End Role="Manken" Type="Self.Manken" Multiplicity="0..1" />
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Manken">
+              <PropertyRef Name="mankenID" />
+            </Principal>
+            <Dependent Role="Ürün">
+              <PropertyRef Name="mankenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürünbeden">
+          <End Role="ÜrünBeden" Type="Self.ÜrünBeden" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Sipariş" Type="Self.Sipariş" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ÜrünBeden">
+              <PropertyRef Name="ürünBedenID" />
+            </Principal>
+            <Dependent Role="Sipariş">
+              <PropertyRef Name="ürünBedenID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürüntasarımcı">
+          <End Role="Tasarımcı" Type="Self.Tasarımcı" Multiplicity="0..1" />
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Tasarımcı">
+              <PropertyRef Name="tasarımcıID" />
+            </Principal>
+            <Dependent Role="Ürün">
+              <PropertyRef Name="tasarımcıID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürünbedeni">
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ÜrünBeden" Type="Self.ÜrünBeden" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ürün">
+              <PropertyRef Name="ürünID" />
+            </Principal>
+            <Dependent Role="ÜrünBeden">
+              <PropertyRef Name="ürünID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ürüntürü">
+          <End Role="ÜrünTürü" Type="Self.ÜrünTürü" Multiplicity="1" />
+          <End Role="Ürün" Type="Self.Ürün" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ÜrünTürü">
+              <PropertyRef Name="ürünTürüID" />
+            </Principal>
+            <Dependent Role="Ürün">
+              <PropertyRef Name="ürünTürüID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="SHOPEntities2" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Beden" EntityType="Self.Beden" />
+          <EntitySet Name="BileşenOranı" EntityType="Self.BileşenOranı" />
+          <EntitySet Name="Cinsiyet" EntityType="Self.Cinsiyet" />
+          <EntitySet Name="Fatura" EntityType="Self.Fatura" />
+          <EntitySet Name="KULLANICI" EntityType="Self.KULLANICI" />
+          <EntitySet Name="KullanıcıTürü" EntityType="Self.KullanıcıTürü" />
+          <EntitySet Name="Manken" EntityType="Self.Manken" />
+          <EntitySet Name="Sipariş" EntityType="Self.Sipariş" />
+          <EntitySet Name="Tasarımcı" EntityType="Self.Tasarımcı" />
+          <EntitySet Name="Ürün" EntityType="Self.Ürün" />
+          <EntitySet Name="ÜrünBeden" EntityType="Self.ÜrünBeden" />
+          <EntitySet Name="ÜrünTürü" EntityType="Self.ÜrünTürü" />
+          <EntitySet Name="Ürünler" EntityType="Self.Ürünler" />
+          <AssociationSet Name="FK_beden" Association="Self.FK_beden">
+            <End Role="Beden" EntitySet="Beden" />
+            <End Role="ÜrünBeden" EntitySet="ÜrünBeden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_mankenbedeni" Association="Self.FK_mankenbedeni">
+            <End Role="Beden" EntitySet="Beden" />
+            <End Role="Manken" EntitySet="Manken" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürünbileşen" Association="Self.FK_ürünbileşen">
+            <End Role="BileşenOranı" EntitySet="BileşenOranı" />
+            <End Role="Ürün" EntitySet="Ürün" />
+          </AssociationSet>
+          <AssociationSet Name="FK_cinsiyet" Association="Self.FK_cinsiyet">
+            <End Role="Cinsiyet" EntitySet="Cinsiyet" />
+            <End Role="KULLANICI" EntitySet="KULLANICI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kullanıcı" Association="Self.FK_kullanıcı">
+            <End Role="KULLANICI" EntitySet="KULLANICI" />
+            <End Role="Sipariş" EntitySet="Sipariş" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kullanıcıtasarımcı" Association="Self.FK_kullanıcıtasarımcı">
+            <End Role="KULLANICI" EntitySet="KULLANICI" />
+            <End Role="Tasarımcı" EntitySet="Tasarımcı" />
+          </AssociationSet>
+          <AssociationSet Name="FK_kullanıcıtürü" Association="Self.FK_kullanıcıtürü">
+            <End Role="KullanıcıTürü" EntitySet="KullanıcıTürü" />
+            <End Role="KULLANICI" EntitySet="KULLANICI" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürünmanken" Association="Self.FK_ürünmanken">
+            <End Role="Manken" EntitySet="Manken" />
+            <End Role="Ürün" EntitySet="Ürün" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürünbeden" Association="Self.FK_ürünbeden">
+            <End Role="ÜrünBeden" EntitySet="ÜrünBeden" />
+            <End Role="Sipariş" EntitySet="Sipariş" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürüntasarımcı" Association="Self.FK_ürüntasarımcı">
+            <End Role="Tasarımcı" EntitySet="Tasarımcı" />
+            <End Role="Ürün" EntitySet="Ürün" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürünbedeni" Association="Self.FK_ürünbedeni">
+            <End Role="Ürün" EntitySet="Ürün" />
+            <End Role="ÜrünBeden" EntitySet="ÜrünBeden" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ürüntürü" Association="Self.FK_ürüntürü">
+            <End Role="ÜrünTürü" EntitySet="ÜrünTürü" />
+            <End Role="Ürün" EntitySet="Ürün" />
+          </AssociationSet>
+          <FunctionImport Name="Ürünler_" ReturnType="Collection(SHOPModel.Ürünler__Result)" />
+        </EntityContainer>
+        <ComplexType Name="Ürünler__Result">
+          <Property Type="String" Name="ürünAdı" Nullable="false" MaxLength="50" />
+          <Property Type="Int32" Name="stokMiktarı" Nullable="true" />
+          <Property Type="String" Name="bedenAdı" Nullable="false" MaxLength="25" />
+          <Property Type="Decimal" Name="fiyat" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="boy" Nullable="true" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="kilo" Nullable="true" Precision="18" Scale="0" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SHOPModelStoreContainer" CdmEntityContainer="SHOPEntities2">
+          <EntitySetMapping Name="Beden">
+            <EntityTypeMapping TypeName="SHOPModel.Beden">
+              <MappingFragment StoreEntitySet="Beden">
+                <ScalarProperty Name="BedenID" ColumnName="BedenID" />
+                <ScalarProperty Name="bedenAdı" ColumnName="bedenAdı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BileşenOranı">
+            <EntityTypeMapping TypeName="SHOPModel.BileşenOranı">
+              <MappingFragment StoreEntitySet="BileşenOranı">
+                <ScalarProperty Name="bileşenID" ColumnName="bileşenID" />
+                <ScalarProperty Name="pamukOranı" ColumnName="pamukOranı" />
+                <ScalarProperty Name="polyesterOranı" ColumnName="polyesterOranı" />
+                <ScalarProperty Name="KetenOranı" ColumnName="KetenOranı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Cinsiyet">
+            <EntityTypeMapping TypeName="SHOPModel.Cinsiyet">
+              <MappingFragment StoreEntitySet="Cinsiyet">
+                <ScalarProperty Name="cinsiyet_ID" ColumnName="cinsiyet_ID" />
+                <ScalarProperty Name="cinsiyetAdı" ColumnName="cinsiyetAdı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Fatura">
+            <EntityTypeMapping TypeName="SHOPModel.Fatura">
+              <MappingFragment StoreEntitySet="Fatura">
+                <ScalarProperty Name="faturaID" ColumnName="faturaID" />
+                <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+                <ScalarProperty Name="toplam" ColumnName="toplam" />
+                <ScalarProperty Name="siparişNo" ColumnName="siparişNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KULLANICI">
+            <EntityTypeMapping TypeName="SHOPModel.KULLANICI">
+              <MappingFragment StoreEntitySet="KULLANICI">
+                <ScalarProperty Name="Ad" ColumnName="Ad" />
+                <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="cinsiyetID" ColumnName="cinsiyetID" />
+                <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+                <ScalarProperty Name="şifre" ColumnName="şifre" />
+                <ScalarProperty Name="kullanıcıTürüID" ColumnName="kullanıcıTürüID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="KullanıcıTürü">
+            <EntityTypeMapping TypeName="SHOPModel.KullanıcıTürü">
+              <MappingFragment StoreEntitySet="KullanıcıTürü">
+                <ScalarProperty Name="kullanıcıTürüID" ColumnName="kullanıcıTürüID" />
+                <ScalarProperty Name="kullanıcıAdı" ColumnName="kullanıcıAdı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Manken">
+            <EntityTypeMapping TypeName="SHOPModel.Manken">
+              <MappingFragment StoreEntitySet="Manken">
+                <ScalarProperty Name="mankenID" ColumnName="mankenID" />
+                <ScalarProperty Name="BedenID" ColumnName="BedenID" />
+                <ScalarProperty Name="boy" ColumnName="boy" />
+                <ScalarProperty Name="kilo" ColumnName="kilo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sipariş">
+            <EntityTypeMapping TypeName="SHOPModel.Sipariş">
+              <MappingFragment StoreEntitySet="Sipariş">
+                <ScalarProperty Name="siparişNo" ColumnName="siparişNo" />
+                <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+                <ScalarProperty Name="ürünBedenID" ColumnName="ürünBedenID" />
+                <ScalarProperty Name="tutar" ColumnName="tutar" />
+                <ScalarProperty Name="tarih" ColumnName="tarih" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tasarımcı">
+            <EntityTypeMapping TypeName="SHOPModel.Tasarımcı">
+              <MappingFragment StoreEntitySet="Tasarımcı">
+                <ScalarProperty Name="tasarımcıID" ColumnName="tasarımcıID" />
+                <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+                <ScalarProperty Name="kazanç" ColumnName="kazanç" />
+                <ScalarProperty Name="tasarımcıAdı" ColumnName="tasarımcıAdı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ürün">
+            <EntityTypeMapping TypeName="SHOPModel.Ürün">
+              <MappingFragment StoreEntitySet="Ürün">
+                <ScalarProperty Name="ürünID" ColumnName="ürünID" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="ürünTürüID" ColumnName="ürünTürüID" />
+                <ScalarProperty Name="tasarımcıID" ColumnName="tasarımcıID" />
+                <ScalarProperty Name="bileşenID" ColumnName="bileşenID" />
+                <ScalarProperty Name="ürünAdı" ColumnName="ürünAdı" />
+                <ScalarProperty Name="mankenID" ColumnName="mankenID" />
+                <ScalarProperty Name="photo" ColumnName="photo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ÜrünBeden">
+            <EntityTypeMapping TypeName="SHOPModel.ÜrünBeden">
+              <MappingFragment StoreEntitySet="ÜrünBeden">
+                <ScalarProperty Name="ürünBedenID" ColumnName="ürünBedenID" />
+                <ScalarProperty Name="BedenID" ColumnName="BedenID" />
+                <ScalarProperty Name="ürünID" ColumnName="ürünID" />
+                <ScalarProperty Name="stokMiktarı" ColumnName="stokMiktarı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ÜrünTürü">
+            <EntityTypeMapping TypeName="SHOPModel.ÜrünTürü">
+              <MappingFragment StoreEntitySet="ÜrünTürü">
+                <ScalarProperty Name="ürünTürüID" ColumnName="ürünTürüID" />
+                <ScalarProperty Name="ürünAdı" ColumnName="ürünAdı" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ürünler">
+            <EntityTypeMapping TypeName="SHOPModel.Ürünler">
+              <MappingFragment StoreEntitySet="Ürünler">
+                <ScalarProperty Name="ürünID" ColumnName="ürünID" />
+                <ScalarProperty Name="ürünAdı" ColumnName="ürünAdı" />
+                <ScalarProperty Name="stokMiktarı" ColumnName="stokMiktarı" />
+                <ScalarProperty Name="bedenAdı" ColumnName="bedenAdı" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="boy" ColumnName="boy" />
+                <ScalarProperty Name="kilo" ColumnName="kilo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="Ürünler_" FunctionName="SHOPModel.Store.Ürünler_">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="SHOPModel.Ürünler__Result">
+                <ScalarProperty Name="ürünAdı" ColumnName="ürünAdı" />
+                <ScalarProperty Name="stokMiktarı" ColumnName="stokMiktarı" />
+                <ScalarProperty Name="bedenAdı" ColumnName="bedenAdı" />
+                <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+                <ScalarProperty Name="boy" ColumnName="boy" />
+                <ScalarProperty Name="kilo" ColumnName="kilo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,150 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SHOPModelStoreContainer" CdmEntityContainer="SHOPEntities2">
+    <EntitySetMapping Name="Beden">
+      <EntityTypeMapping TypeName="SHOPModel.Beden">
+        <MappingFragment StoreEntitySet="Beden">
+          <ScalarProperty Name="BedenID" ColumnName="BedenID" />
+          <ScalarProperty Name="bedenAdı" ColumnName="bedenAdı" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BileşenOranı">
+      <EntityTypeMapping TypeName="SHOPModel.BileşenOranı">
+        <MappingFragment StoreEntitySet="BileşenOranı">
+          <ScalarProperty Name="bileşenID" ColumnName="bileşenID" />
+          <ScalarProperty Name="pamukOranı" ColumnName="pamukOranı" />
+          <ScalarProperty Name="polyesterOranı" ColumnName="polyesterOranı" />
+          <ScalarProperty Name="KetenOranı" ColumnName="KetenOranı" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cinsiyet">
+      <EntityTypeMapping TypeName="SHOPModel.Cinsiyet">
+        <MappingFragment StoreEntitySet="Cinsiyet">
+          <ScalarProperty Name="cinsiyet_ID" ColumnName="cinsiyet_ID" />
+          <ScalarProperty Name="cinsiyetAdı" ColumnName="cinsiyetAdı" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Fatura">
+      <EntityTypeMapping TypeName="SHOPModel.Fatura">
+        <MappingFragment StoreEntitySet="Fatura">
+          <ScalarProperty Name="faturaID" ColumnName="faturaID" />
+          <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+          <ScalarProperty Name="toplam" ColumnName="toplam" />
+          <ScalarProperty Name="siparişNo" ColumnName="siparişNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KULLANICI">
+      <EntityTypeMapping TypeName="SHOPModel.KULLANICI">
+        <MappingFragment StoreEntitySet="KULLANICI">
+          <ScalarProperty Name="Ad" ColumnName="Ad" />
+          <ScalarProperty Name="Soyad" ColumnName="Soyad" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="cinsiyetID" ColumnName="cinsiyetID" />
+          <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+          <ScalarProperty Name="şifre" ColumnName="şifre" />
+          <ScalarProperty Name="kullanıcıTürüID" ColumnName="kullanıcıTürüID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="KullanıcıTürü">
+      <EntityTypeMapping TypeName="SHOPModel.KullanıcıTürü">
+        <MappingFragment StoreEntitySet="KullanıcıTürü">
+          <ScalarProperty Name="kullanıcıTürüID" ColumnName="kullanıcıTürüID" />
+          <ScalarProperty Name="kullanıcıAdı" ColumnName="kullanıcıAdı" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Manken">
+      <EntityTypeMapping TypeName="SHOPModel.Manken">
+        <MappingFragment StoreEntitySet="Manken">
+          <ScalarProperty Name="mankenID" ColumnName="mankenID" />
+          <ScalarProperty Name="BedenID" ColumnName="BedenID" />
+          <ScalarProperty Name="boy" ColumnName="boy" />
+          <ScalarProperty Name="kilo" ColumnName="kilo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sipariş">
+      <EntityTypeMapping TypeName="SHOPModel.Sipariş">
+        <MappingFragment StoreEntitySet="Sipariş">
+          <ScalarProperty Name="siparişNo" ColumnName="siparişNo" />
+          <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+          <ScalarProperty Name="ürünBedenID" ColumnName="ürünBedenID" />
+          <ScalarProperty Name="tutar" ColumnName="tutar" />
+          <ScalarProperty Name="tarih" ColumnName="tarih" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tasarımcı">
+      <EntityTypeMapping TypeName="SHOPModel.Tasarımcı">
+        <MappingFragment StoreEntitySet="Tasarımcı">
+          <ScalarProperty Name="tasarımcıID" ColumnName="tasarımcıID" />
+          <ScalarProperty Name="kullanıcıID" ColumnName="kullanıcıID" />
+          <ScalarProperty Name="kazanç" ColumnName="kazanç" />
+          <ScalarProperty Name="tasarımcıAdı" ColumnName="tasarımcıAdı" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ürün">
+      <EntityTypeMapping TypeName="SHOPModel.Ürün">
+        <MappingFragment StoreEntitySet="Ürün">
+          <ScalarProperty Name="ürünID" ColumnName="ürünID" />
+          <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+          <ScalarProperty Name="ürünTürüID" ColumnName="ürünTürüID" />
+          <ScalarProperty Name="tasarımcıID" ColumnName="tasarımcıID" />
+          <ScalarProperty Name="bileşenID" ColumnName="bileşenID" />
+          <ScalarProperty Name="ürünAdı" ColumnName="ürünAdı" />
+          <ScalarProperty Name="mankenID" ColumnName="mankenID" />
+          <ScalarProperty Name="photo" ColumnName="photo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ÜrünBeden">
+      <EntityTypeMapping TypeName="SHOPModel.ÜrünBeden">
+        <MappingFragment StoreEntitySet="ÜrünBeden">
+          <ScalarProperty Name="ürünBedenID" ColumnName="ürünBedenID" />
+          <ScalarProperty Name="BedenID" ColumnName="BedenID" />
+          <ScalarProperty Name="ürünID" ColumnName="ürünID" />
+          <ScalarProperty Name="stokMiktarı" ColumnName="stokMiktarı" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ÜrünTürü">
+      <EntityTypeMapping TypeName="SHOPModel.ÜrünTürü">
+        <MappingFragment StoreEntitySet="ÜrünTürü">
+          <ScalarProperty Name="ürünTürüID" ColumnName="ürünTürüID" />
+          <ScalarProperty Name="ürünAdı" ColumnName="ürünAdı" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ürünler">
+      <EntityTypeMapping TypeName="SHOPModel.Ürünler">
+        <MappingFragment StoreEntitySet="Ürünler">
+          <ScalarProperty Name="ürünID" ColumnName="ürünID" />
+          <ScalarProperty Name="ürünAdı" ColumnName="ürünAdı" />
+          <ScalarProperty Name="stokMiktarı" ColumnName="stokMiktarı" />
+          <ScalarProperty Name="bedenAdı" ColumnName="bedenAdı" />
+          <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+          <ScalarProperty Name="boy" ColumnName="boy" />
+          <ScalarProperty Name="kilo" ColumnName="kilo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="Ürünler_" FunctionName="SHOPModel.Store.Ürünler_">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="SHOPModel.Ürünler__Result">
+          <ScalarProperty Name="ürünAdı" ColumnName="ürünAdı" />
+          <ScalarProperty Name="stokMiktarı" ColumnName="stokMiktarı" />
+          <ScalarProperty Name="bedenAdı" ColumnName="bedenAdı" />
+          <ScalarProperty Name="fiyat" ColumnName="fiyat" />
+          <ScalarProperty Name="boy" ColumnName="boy" />
+          <ScalarProperty Name="kilo" ColumnName="kilo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

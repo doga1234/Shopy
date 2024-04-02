@@ -1,0 +1,120 @@
+﻿@using UyumProje.Models;
+@model List<Ürün>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Layout.cshtml";
+    string y = "0";
+    if (Session["rol"] != null)
+    {
+        y = Session["rol"].ToString();
+    }
+}
+
+
+<form>
+    <input type="hidden" class="form-control" value="@y" id="id">
+</form>
+
+<div class="row">
+   
+    
+
+    <div style="display:inline-flex;margin:auto">
+        <div class="text-center" style="margin:15px"><a class="btn btn-outline-dark mt-auto" href="/Satıcı/UrunEkle/">Yeni Ürün Ekle</a></div>
+        <div class="text-center" style="margin:15px"><a class="btn btn-outline-dark mt-auto" href="/Satıcı/TürEkle/">Yeni Tür Ekle</a></div>
+        @if (y == "2")
+        {
+            <div class="text-center" style="margin:15px"><a class="btn btn-outline-dark mt-auto" href="/Satıcı/MankenEkle/">Manken Ekle</a></div>
+            <div class="text-center" style="margin:15px"><a class="btn btn-outline-dark mt-auto" href="/Guvenlik/Login/3">Tasarımcı Ekle</a></div>
+        }
+
+    </div>
+   
+    @foreach (Ürün k in Model)
+
+    {
+        <div style="margin-bottom:15px" class="col-md-4">
+            <div class="width=300px">
+                <div class="card h-100">
+                    <!-- Product image-->
+                    @if (k.photo != null)
+                    {
+                        <img class="card-img-top" src="@k.photo" alt="bulunamadı" />
+
+                    }
+                    else
+                    {
+                        <img class="card-img-top" src="https://cdn.sorsware.com/oxxo/ContentImages/Product/23y/23YOX-POPGOMDUZ/pamuklu-loose-fit-gomlek_fiery-red-kirmizi_1_enbuyuk.jpg" />
+                    }
+                    <!-- Product details-->
+                    <div class="card-body p-4">
+                        <div class="text-center">
+                            <!-- Product name-->
+                            <h5 class="fw-bolder">@k.ürünAdı</h5>
+                            <!-- Product price-->
+                            @k.fiyat TL
+                        </div>
+                    </div>
+                    <!-- Product actions-->
+                    <div class="card-footer p-4 pt-0 border-top-0 bg-transparent" style="display: inline-flex">
+                        <div class="text-center" style="margin:auto">
+                            <a href="#" data-urunId="@k.ürünID" class="btn btn-danger ürünSil"> Sil </a>
+                        </div>
+
+                        <div class="text-center" style="margin-right:5px">
+                            <a class="btn btn-outline-dark mt-auto" href="/Satıcı/UrunGuncelle/@k.ürünID">Güncelle</a>
+                        </div>
+                        @if(y=="2"){
+                        <div class="text-center" >
+                            <a class="btn btn-outline-dark mt-auto" href="/Satıcı/StokEkle/@k.ürünID">Stok Ekle</a>
+                        </div>
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    }
+
+
+</div>
+
+<script>
+    
+    
+
+
+   
+           
+           
+    $(".ürünSil").click(
+        function () {
+            var sonuc = confirm("Kayit silinsin mi?");
+            if (sonuc) {
+                var kid = $(this).attr("data-urunId");
+                
+                $.ajax(
+                    {
+                        type: "POST",
+                        url: "/Satıcı/UrunSil/" + kid,
+                        success: function () {
+                            alert("Kayit silindi");
+                            window.location.replace("/Satıcı/Satıcı");
+                        },
+                        error: function () {
+                            alert("Kayit silinemedi");
+                        }
+                    }
+                );
+            }
+            else {
+                alert("Silme İptal Edildi");
+            }
+        }
+    );
+
+
+
+</script>
+

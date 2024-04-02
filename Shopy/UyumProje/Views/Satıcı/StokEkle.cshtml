@@ -1,0 +1,98 @@
+﻿@using UyumProje.Models;
+
+@{
+    ViewBag.Title = "StokEkle";
+    Layout = "~/Views/Layout2.cshtml";
+    int id = ViewBag.id;
+}
+
+<h2>StokEkle</h2>
+
+<div class="main" id="myP1">
+    <div class="col-md-6 col-sm-12">
+        <div class="register-form">
+            <form>
+
+                <div class="form-group">
+                    
+
+                    <input type="hidden" class="form-control"  value="@id" name="ürünID" id="txtÜrünId">
+
+                </div>
+
+
+
+
+                <div class="form-group">
+                    <label>Small</label>
+
+                    <input type="text" class="form-control" name="Small" id="txtSmall">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>Medium</label>
+
+                    <input type="text" class="form-control" name="Medium" id="txtMedium">
+
+                </div>
+
+
+                <div class="form-group">
+                    <label>Large</label>
+
+                    <input type="text" class="form-control" name="Large" id="txtLarge">
+
+                </div>
+
+
+
+
+                <input id="btnStok" type="button" class="btn btn-black" value="Ekle">
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#btnStok").click(function () {
+        var stok = [];
+        stok[0] = $("#txtSmall").val();
+        stok[1] = $("#txtMedium").val();
+        stok[2] = $("#txtLarge").val();
+        stok[3] = $("#txtÜrünId").val();
+        
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Satıcı/StokEkle ",
+            data: '{stok: ' + JSON.stringify(stok) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alert("Stok Eklendi");
+                window.location.replace("/Satıcı/Satıcı");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+
+</script>
+
+
+
+
+
+
+

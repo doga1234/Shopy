@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "TürEkle";
+    Layout = "~/Views/Layout2.cshtml";
+}
+
+<h2>TürEkle</h2>
+
+<div class="main" id="myP1">
+    <div class="col-md-6 col-sm-12">
+        <div class="register-form">
+            <form>
+
+                <div class="form-group">
+                    <label>Yeni Tür</label>
+
+                    <input type="text" class="form-control" name="Large" id="txtTür">
+
+                </div>
+
+
+
+
+                <input id="btnTur" type="button" class="btn btn-black" value="Ekle">
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    $("#btnTur").click(function () {
+        var tur = {};
+        tur.ürünAdı = $("#txtTür").val();
+
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Satıcı/TurEkle ",
+            data: '{tur: ' + JSON.stringify(tur) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alert("Yeni tür eklendi");
+                window.location.replace("/Satıcı/Satıcı");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+
+</script>

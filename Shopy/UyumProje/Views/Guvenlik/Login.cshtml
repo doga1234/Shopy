@@ -1,0 +1,177 @@
+﻿@using UyumProje.Models;
+
+@{
+    Layout = "~/Views/Layout2.cshtml";
+}
+
+<form>
+    <input type="hidden" class="form-control" value="@ViewBag.id" id="id" >
+</form>
+
+    
+<div class="main" id="myP1">
+    <div class="col-md-6 col-sm-12">
+        <div class="login-form">
+            <form>
+                <div class="form-group">
+                    <label>User Name</label>
+                    <input type="text" class="form-control" placeholder="User Name" id="loginName" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" class="form-control" placeholder="Password" id="loginPassword" required>
+                </div>
+
+                <input id="btnLogin" type="submit" class="btn btn-black" value="Login">
+                <input type="button" class="btn btn-black" onclick="demoDisplay()" value="Register">
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+<div class="main" id="myP2" style="display:none">
+    <div class="col-md-6 col-sm-12">
+        <div class="register-form">
+            <form id="basic-form" action="" method="post">
+                <div class="form-group">
+                    <label>Name*</label>
+
+                    <input type="text" class="form-control" id="txtName" required>
+                </div>
+                <div class="form-group">
+                    <label>Surname*</label>
+                    <input type="text" class="form-control" placeholder="Password" id="txtSurname" required>
+                </div>
+                <div class="form-group">
+                    <label>Email*</label>
+                    <input type="email" class="form-control" placeholder="Password" id="txtMail" required>
+                </div>
+                <div class="form-group">
+                    <label>Cinsiyet</label>
+                    <select class="form-control" id="txtCinsiyet">
+                        @foreach (Cinsiyet k in ViewBag.Cinsiyet as List<Cinsiyet>)
+                        {
+                            <option value="@k.cinsiyet_ID">@k.cinsiyetAdı</option>
+                        }
+                        <option value="@null">None</option>
+
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Şifre*</label>
+                    <input type="text" class="form-control" placeholder="Password" id="txtPassword" minlength="3" required>
+                </div>
+                <div class="form-group">
+                    
+                    <input type="hidden" class="form-control" value="@ViewBag.id" id="kullanıcıTür" >
+                </div>
+
+            </form>
+            <form>
+
+                <input id="btnGet" type="button" class="btn btn-black" value="Register">
+                <input type="button" class="btn btn-black" onclick="demoDisplay2()" value="Login">
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+<script>
+
+
+    function demoDisplay() {
+        document.getElementById("myP1").style.display = "none";
+        document.getElementById("myP2").style.display = "block";
+    }
+
+    function demoDisplay2() {
+        document.getElementById("myP1").style.display = "block";
+        document.getElementById("myP2").style.display = "none";
+    }
+
+    $(document).ready(function () {
+        $("#basic-form").validate();
+    });
+
+    $(document).ready(function () {
+        if ($("#id").val() == 3) {
+            demoDisplay();
+        }
+    });
+
+
+    $("#btnGet").click(function () {
+        var kullanici = {};
+        kullanici.Ad = $("#txtName").val();
+        kullanici.Soyad = $("#txtSurname").val();
+        kullanici.Email = $("#txtMail").val();
+        kullanici.cinsiyetID = $("#txtCinsiyet").val();
+        kullanici.şifre = $("#txtPassword").val();
+        kullanici.kullanıcıTürüID =$("#kullanıcıTür").val();
+        if ($("#txtName").val() == "" || $("#txtSurname").val() == "" || $("#txtMail").val() == "" ||
+            $("#txtPassword").val() == "") {
+            alert("Please enter all necessary fields");
+            return false;
+        }
+        $.ajax({
+            type: "POST",
+            url: "/Guvenlik/AjaxMethod ",
+            data: '{kullanici: ' + JSON.stringify(kullanici) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alert("Hoşgeldinizzz");
+                window.location.replace("/Guvenlik/Login");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+
+    $("#btnLogin").click(function () {
+        var kullanici = {};
+        kullanici.Ad = $("#loginName").val();
+        kullanici.şifre = $("#loginPassword").val();
+        
+
+        $.ajax({
+            type: "POST",
+            url: "/Guvenlik/Login",
+            data: '{kullanici: ' + JSON.stringify(kullanici) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                if (response != "fail") {
+                    alert("Hoşgeldiniz");
+                    if (response == "1") {
+                        
+                        window.location.replace("/AnaSayfa/Urunler");
+                    } else {
+                        window.location.replace("/Satıcı/Satıcı");
+                    }
+                } else {
+                    alert("Kullanıcı adı veya şifre hatalı");
+                    window.location.replace("/Guvenlik/Login");
+                }
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+
+</script>

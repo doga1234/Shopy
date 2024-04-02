@@ -1,0 +1,199 @@
+﻿@using UyumProje.Models;
+@model Ürün
+@{
+    ViewBag.Title = "UrunEkle";
+    Layout = "~/Views/Layout2.cshtml";
+}
+
+
+
+
+
+
+
+<div class="main" id="myP1">
+    <div style="margin-bottom:50px" class="col-md-6 col-sm-12">
+        <div class="register-form">
+            <form>
+
+
+
+                @if (Model.ürünAdı != null)
+                {
+                    <input type="hidden" class="form-control" value="@Model.ürünID" name="ÜrünID" id="txtÜrünID">
+                }
+
+
+
+                <div class="form-group">
+
+                    <label>Ürün Adı</label>
+                    @if (Model.ürünAdı == null)
+                    {
+                        <input type="text" class="form-control" name="ÜrünAd" id="txtÜrünAdı">
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="@Model.ürünAdı " name="ÜrünAd" id="txtÜrünAdı">
+                    }
+                </div>
+
+
+                <div class="form-group">
+                    <label>Fiyat</label>
+                    @if (Model.ürünAdı == null)
+                    {
+                        <input type="text" class="form-control" name="fiyat" id="txtFiyat">
+                    }
+                    else
+                    { <input type="text" class="form-control" value="@Model.fiyat" name="fiyat" id="txtFiyat">}
+                </div>
+
+                <div class="form-group">
+                    <label>Ürün Türü</label>
+                    <select class="form-control" id="txtÜrünTürü" name="tür">
+
+                        @foreach (ÜrünTürü k in ViewBag.ÜrünTürü as List<ÜrünTürü>)
+                        {
+                            <option value="@k.ürünTürüID">@k.ürünAdı</option>
+                        }
+                        @if (Model.ÜrünTürü != null)
+                        {
+                            <option value="@Model.ürünTürüID" selected>@Model.ÜrünTürü.ürünAdı</option>
+                        }
+
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label>Tasarımcı</label>
+                    <select class="form-control" id="txtTasarımcıID" name="Tasarımcı">
+
+                        @foreach (Tasarımcı k in ViewBag.Tasarımcı as List<Tasarımcı>)
+                        {
+                            <option value="@k.tasarımcıID  ">@k.KULLANICI.Ad @k.KULLANICI.Soyad </option>
+                        }
+                        @if (Model.tasarımcıID != null)
+                        {
+                            <option value="@Model.tasarımcıID" selected>
+                                @Model.Tasarımcı.KULLANICI.Ad
+                            @Model.Tasarımcı.KULLANICI.Soyad
+                        </option>
+                    }
+
+                    </select>
+                </div>
+
+
+                <div class="form-group">
+                    <label>Bileşen Oranı</label>
+                    <select class="form-control" id="txtBileşen" name="bileşen">
+
+                        @foreach (BileşenOranı k in ViewBag.BileşenOranı as List<BileşenOranı>)
+                        {
+
+                            <option value="@k.bileşenID">
+                                Keten @k.KetenOranı,
+                                Pamuk @k.pamukOranı, Polyester @k.polyesterOranı
+                            </option>
+
+                        }
+                        @if (Model.BileşenOranı != null)
+                        {
+                            <option value="@Model.bileşenID" selected>
+                                Keten @Model.BileşenOranı.KetenOranı ,
+                                Pamuk @Model.BileşenOranı.pamukOranı, Polyester @Model.BileşenOranı.polyesterOranı
+                            </option>
+                        }
+
+                    </select>
+                </div>
+
+
+
+
+                <div class="form-group">
+
+                    <label>Ürün Fotoğrafı</label>
+                    @if (Model.ürünAdı == null)
+                    {
+                        <input type="text" class="form-control" name="ÜrünFoto" id="txtFoto">
+                    }
+                    else
+                    {
+                        <input type="text" class="form-control" value="@Model.photo " name="ÜrünFoto" id="txtFoto">
+                    }
+                </div>
+
+                <div class="form-group">
+                    <label>Manken</label>
+                    <select class="form-control" id="txtManken" name="Manken">
+
+                        <option value="@null">None</option>
+
+                        @foreach (Manken k in ViewBag.Manken as List<Manken>)
+                        {
+                            <option value="@k.mankenID">
+                                Boy @k.boy, Kilo @k.kilo,
+                                Beden @k.Beden.bedenAdı
+                            </option>
+                        }
+                        @if (Model.Manken != null)
+                        {
+                            <option value="@Model.Manken.mankenID" selected>
+                                Boy @Model.Manken.boy, Kilo
+                                @Model.Manken.kilo kg, @Model.Manken.Beden.bedenAdı
+                            </option>
+                        }
+
+                    </select>
+                </div>
+
+                
+
+                <input id="btnNext" type="button" class="btn btn-black" value="Register">
+                <a type="button" class="btn btn-black" href="/Satıcı/Satıcı/">Cancel</a>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+
+    $("#btnNext").click(function () {
+        var urun = {};
+        urun.ürünID = $("#txtÜrünID").val();
+        urun.ürünAdı = $("#txtÜrünAdı").val();
+        urun.fiyat = $("#txtFiyat").val();
+        urun.ürünTürüID = $("#txtÜrünTürü").val();
+        urun.tasarımcıID = $("#txtTasarımcıID").val();
+        urun.bileşenID = $("#txtBileşen").val();
+        urun.photo = $("#txtFoto").val();
+        urun.mankenID = $("#txtManken").val();
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Satıcı/AjaxMethod ",
+            data: '{urun: ' + JSON.stringify(urun) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alert("Ürün Başarıyla eklendi");
+                window.location.replace("/Satıcı/Satıcı");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+</script>

@@ -1,0 +1,61 @@
+﻿
+@{
+    Layout = null;
+    string x = "0";
+    if (Session["rol"] != null)
+    {
+        x = Session["rol"].ToString();
+    }
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.0/jquery.validate.min.js"></script>
+
+    <meta name="viewport" content="width=device-width" />
+    <title>Login</title>
+    <link href="~/SH/css/StyleSheet.css" rel="stylesheet" />
+    <style>
+
+        a:hover {
+            background-color: white;
+            color: black;
+        }
+
+        a:link {
+            text-decoration: none;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidenav">
+        <div class="login-main-text">
+            <h2>  Shopy</h2>
+
+            <h2>Shop for yourself</h2>
+            @if (x == "0")
+            {
+                <p>Login or register from here to access.</p>
+            }
+            @if (x == "3")
+            {
+                <p>Bizimle çalıştığın için teşekkürler, @Session["username"]</p>
+            }
+            @if (x == "2")
+            {
+                <p>Dikkatli ol,@Session["username"]</p>
+            }
+        </div>
+    </div>
+    @RenderBody()
+</body>
+</html>

@@ -1,0 +1,107 @@
+﻿@using UyumProje.Models;
+@model Manken
+@{
+    ViewBag.Title = "MankenEkle";
+    Layout = "~/Views/Layout2.cshtml";
+}
+
+
+
+<div class="main" id="myP1">
+    <div class="col-md-6 col-sm-12">
+        <div class="register-form">
+            <form>
+
+                @if (Model.mankenID==0)
+                {
+                    <input type="hidden" class="form-control" value="@Model.mankenID" name="MankenID" id="txtMankenID">
+                }
+
+
+
+
+
+
+                <div class="form-group">
+                    <label>Boy</label>
+                    @if (Model.mankenID == 0)
+                    {
+                        <input type="text" class="form-control" name="boy" id="txtBoy">
+                    }
+                    else
+                    { <input type="text" class="form-control" value="@Model.boy" name="boy" id="txtBoy">}
+                </div>
+
+                <div class="form-group">
+                    <label>Kilo</label>
+                    @if (Model.mankenID == 0)
+                    {
+                        <input type="text" class="form-control" name="kilo" id="txtKilo">
+                    }
+                    else
+                    { <input type="text" class="form-control" value="@Model.kilo" name="kilo" id="txtKilo">}
+                </div>
+
+                <div class="form-group">
+                    <label>Beden</label>
+                    <select class="form-control" id="txtBeden" name="beden">
+
+                        @foreach (Beden k in ViewBag.Beden as List<Beden>)
+                        {
+                            <option style="text-transform:capitalize" value="@k.BedenID">@k.bedenAdı</option>
+                        }
+                        @if (Model.mankenID != 0)
+                        {
+                            <option value="@Model.Beden.BedenID" selected>@Model.Beden.bedenAdı</option>
+                        }
+
+
+
+
+                    </select>
+                </div>
+
+
+
+
+                <input id="btnManken" type="button" class="btn btn-black" value="Register">
+
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    $("#btnManken").click(function () {
+        var manken = {};
+        manken.mankenID = $("#txtMankenID").val();
+        manken.boy = $("#txtBoy").val();
+        manken.kilo = $("#txtKilo").val();
+        manken.BedenID = $("#txtBeden").val();
+        
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Satıcı/MankenEkle ",
+            data: '{manken: ' + JSON.stringify(manken) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alert("Hoşgeldinizzz");
+                window.location.replace("/Satıcı/Satıcı");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+</script>

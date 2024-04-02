@@ -1,0 +1,202 @@
+﻿@using UyumProje.Models;
+@model ÜrünTürü
+
+@{
+    List<ÜrünTürü> u = ViewBag.ÜrünTürü;
+    string rol = "0";
+    string insan = "a";
+    if (Session["rol"] != null)
+    {
+        rol = Session["rol"].ToString();
+        insan= Session["id"].ToString();
+    }
+
+}
+@{
+    ViewBag.Title = "Urunler";
+    Layout = "~/Views/Layout.cshtml";
+}
+
+
+
+@if(Model!=null){
+    <h2 style="text-transform:uppercase">@Model.ürünAdı</h2>
+}
+
+
+
+
+
+
+
+
+
+<div class="row">
+
+
+    @foreach (Ürün k in ViewBag.Ürün as List<Ürün>)
+    {
+        if (Model == null || k.ürünTürüID == Model.ürünTürüID)
+        {
+
+            <div class="col-md-4">
+                <div>
+                    <div style="position:absolute;display:none" id="@k.ürünID">
+                        <div>
+
+                            <ul>
+                                <li>
+                                    Bileşen Bilgisi
+                                    Keten %@k.BileşenOranı.KetenOranı,Pamuk %@k.BileşenOranı.pamukOranı,
+                                    Polyester %@k.BileşenOranı.polyesterOranı
+                                </li>
+                                <li>
+                                    Tasarımcı Bilgisi
+                                    @if (@k.Tasarımcı != null)
+                                    {
+                                        @k.Tasarımcı.KULLANICI.Ad
+                                        @k.Tasarımcı.KULLANICI.Soyad
+                                    }
+                                </li>
+                                <li>
+                                    Manken Bilgisi
+                                    @if (k.Manken != null)
+                                    {
+                                        <p>Boy @k.Manken.boy</p>
+                                        
+                                        <p>Kilo  @k.Manken.kilo</p>
+                                       
+                                        <p>Beden @k.Manken.Beden.bedenAdı</p>
+                                        
+
+                                    }
+                                </li>
+                            </ul>
+
+
+
+                        </div>
+                    </div>
+                    @{int x = -k.ürünID;}
+                    <div class="card h-100" id="@x">
+
+                        @if (k.photo != null)
+                        {
+                            <img class="card-img-top" src="@k.photo" alt="bulunamadı" />
+
+                        }
+                        else
+                        {
+                            <img class="card-img-top" src="https://cdn.sorsware.com/oxxo/ContentImages/Product/23y/23YOX-POPGOMDUZ/pamuklu-loose-fit-gomlek_fiery-red-kirmizi_1_enbuyuk.jpg" />
+                        }
+
+                        <div class="card-body p-4">
+                            <div class="text-center">
+
+                                <h5 class="fw-bolder">@k.ürünAdı</h5>
+
+                                @k.fiyat TL
+                            </div>
+                        </div>
+                        <!-- Product actions-->
+                        <div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
+                            <div class="text-center" style="margin-bottom:10px"><a class="btn btn-outline-dark mt-auto" onclick="demoDisplay(@k.ürünID,@x)">Detaylar</a></div>
+                            @if (rol =="2"|| rol=="1") {
+                            <form>
+                                @{int c = k.ürünID + 15000;}
+                                <div class="text-center"><a class="btn btn-outline-dark mt-auto " onclick="display(@c)">Beden Seç</a></div>
+
+                                <div id="@c" style="display:none" >
+                                    <div class="form-group">
+
+                                        <select class="form-control" id="txtBeden" name="Beden" style="margin:5px">
+
+                                            <option value="1">S</option>
+                                            <option value="2">M</option>
+                                            <option value="3">L</option>
+
+                                        </select>
+                                    </div>
+
+
+
+                                    <input type="hidden" value="@insan" name="id" id="txtID">
+                                    <input type="hidden" value="@k.fiyat" name="fiyat" id="txtFiyat">
+                                    <div class="text-center"><a class="btn btn-outline-dark mt-auto btnSepet" data-urunId="@k.ürünID">Sepete Ekle</a></div>
+                                </div>
+                            </form>
+                            }
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+                            }
+                        }
+
+</div>
+
+
+
+
+<script>
+    function display(c) {
+        var x = document.getElementById(c);
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+        }
+        else {
+            x.style.display = 'none';
+        }
+
+    }
+    function display2(c) {
+        document.getElementById(c).style.display = "none";
+    }
+
+    function demoDisplay(div1, div2) {
+        var x = document.getElementById(div1);
+        var y = document.getElementById(div2);
+        if (x.style.display === 'none') {
+            x.style.display = 'block';
+            y.style.opacity = 0.3;
+        } else {
+            x.style.display = 'none';
+            y.style.opacity = 1;
+        }
+    }
+
+    $(".btnSepet").click(function () {
+        var siparis = [];
+        siparis[0]= $("#txtID").val();
+        siparis[1] = $("#txtBeden").val();
+        siparis[2] = $("#txtFiyat").val();
+        siparis[3] = $(this).attr("data-urunId");
+        alert(siparis[0]);
+        alert(siparis[1]);
+        alert(siparis[2]);
+        alert(siparis[3]);
+
+
+
+        $.ajax({
+            type: "POST",
+            url: "/Satıcı/SıparisEkle ",
+            data: '{siparis: ' + JSON.stringify(siparis) + '}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (response) {
+                alert("Sipariş eklendi");
+                window.location.replace("/Satıcı/Satıcı");
+            },
+            failure: function (response) {
+                alert(response.responseText);
+            },
+            error: function (response) {
+                alert(response.responseText);
+            }
+        });
+    });
+
+</script>
